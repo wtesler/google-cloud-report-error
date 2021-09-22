@@ -1,0 +1,29 @@
+{
+  "name": "google-cloud-secrets",
+  "version": "1.0.0",
+  "description": "Report error to Google Cloud Error Reporting if it meets certain criteria.",
+  "author": "Will Tesler",
+  "main": "src/index.js",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wtesler/google-cloud-report-error.git"
+  },
+  "homepage": "https://github.com/wtesler/google-cloud-report-error",
+  "keywords": [
+    "google",
+    "cloud",
+    "error",
+    "reporting"
+  ],
+  "dependencies": {
+    "@google-cloud/error-reporting": "^2"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "eslint": "7.29.0",
+    "eslint-plugin-promise": "5.1.0",
+    "prettier": "2.3.2"
+  }
+}

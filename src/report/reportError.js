@@ -1,17 +1,17 @@
 /**
  * Report the server error to Google Cloud Platform and return an error response.
  */
-function reportError(e, service='default') {
+async function reportError(e, service='default') {
   console.error(e);
   const responseBody = { message: e.message, code: e.code };
   responseBody.code = responseBody.code ? responseBody.code : 500;
   if (responseBody.code === 500) {
-    report(e, service); // We only report server errors.
+    await report(e, service); // We only report server errors.
   }
   return responseBody;
 }
 
-function report(e, service) {
+async function report(e, service) {
   if (process.env.NODE_ENV === "development") {
     console.warn("Would have reported error but in development.");
   } else {
@@ -27,7 +27,15 @@ function report(e, service) {
       logLevel: 5
     });
 
-    errorReporting.report(e);
+    return new Promise((resolve, reject) => {
+      try {
+        errorReporting.report(e, null, null, function () {
+          resolve();
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
   }
 }
 

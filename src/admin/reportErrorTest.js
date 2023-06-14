@@ -1,4 +1,4 @@
-const reportError = require("../report/reportError");
+const {reportError} = require("../report/reportError");
 
 (async() => {
   process.env.NODE_ENV = "production";

@@ -29,11 +29,15 @@ async function report(e, service) {
 
     return new Promise((resolve, reject) => {
       try {
-        errorReporting.report(e, null, null, function () {
-          resolve();
+        errorReporting.report(e, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
         });
-      } catch (e) {
-        reject(e);
+      } catch (err) {
+        reject(err);
       }
     });
   }

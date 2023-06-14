@@ -5,7 +5,7 @@ async function reportError(e, service='default') {
   console.error(e);
   const responseBody = { message: e.message, code: e.code };
   responseBody.code = responseBody.code ? responseBody.code : 500;
-  if (responseBody.code === 500) {
+  if (responseBody.code >= 500) {
     await report(e, service); // We only report server errors.
   }
   return responseBody;

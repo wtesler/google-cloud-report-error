@@ -1,6 +1,6 @@
 {
   "name": "google-cloud-report-error",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Report error to Google Cloud Error Reporting if it meets certain criteria.",
   "author": "Will Tesler",
   "main": "src/index.js",

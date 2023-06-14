@@ -1,7 +1,8 @@
-const reportError = require('./report/reportError');
+const {reportError, report} = require('./report/reportError');
 
 const theModule = {
-  reportError: reportError
+  reportError: reportError,
+  report: report,
 }
 
 module.exports = theModule;

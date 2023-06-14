@@ -1,7 +1,7 @@
 /**
  * Report the server error to Google Cloud Platform and return an error response.
  */
-module.exports = function(e, service='default') {
+function reportError(e, service='default') {
   console.error(e);
   const responseBody = { message: e.message, code: e.code };
   responseBody.code = responseBody.code ? responseBody.code : 500;
@@ -9,7 +9,7 @@ module.exports = function(e, service='default') {
     report(e, service); // We only report server errors.
   }
   return responseBody;
-};
+}
 
 function report(e, service) {
   if (process.env.NODE_ENV === "development") {
@@ -30,3 +30,7 @@ function report(e, service) {
     errorReporting.report(e);
   }
 }
+
+module.exports = {
+  reportError, report
+};

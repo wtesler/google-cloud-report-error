@@ -2,14 +2,21 @@
  * Report the server error to Google Cloud Platform and return an error response.
  */
 async function reportError(e, service='default') {
-  console.error(e);
-  const responseBody = { message: e.message, code: e.code };
-  responseBody.code = responseBody.code ? responseBody.code : 500;
-  const code = responseBody.code;
-  const acceptableErrors = [403, 405, 422];
-  if (code > 400 && !acceptableErrors.includes(code)) {
-    await report(e, service); // We only report server errors.
+  let errorCode = e.code ? e.code : e.statusCode;
+  if (!errorCode) {
+    errorCode = 500;
   }
+
+  const responseBody = { message: e.message, code: errorCode };
+
+  const acceptableErrors = [403, 405, 422];
+  if (errorCode > 400 && !acceptableErrors.includes(errorCode)) {
+    console.error(e);
+    await report(e, service); // We only report server errors.
+  } else {
+    console.warn(e);
+  }
+
   return responseBody;
 }
 
